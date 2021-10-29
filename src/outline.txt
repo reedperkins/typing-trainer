@@ -1,0 +1,41 @@
+The typing state can be represented by the tuple 
+
+(
+  buffer,
+  target char,
+  isValid,
+  errorCount
+)
+
+where "buffer" represents the text that has been typed in so far, "target char" represents the next char after the last correctly typed character in the buffer, isValid indicates if the buffer matches a slice of the input text from the beginning up to the length of the buffer, and errorCount represents the number of characters typed after the last correctly typed characted in the buffer.
+
+Transformations of the type f: state -> state are defined as follows:
+
+Assume initial state:
+buffer = ''
+targetChar = sourceText[0]
+isValid = true
+errorCount = 0
+
+If the character typed is a valid typeable character:
+newBuffer = buffer + newChar
+if isValid and newChar == targetChar:
+  newTargetChar = source[buffer.length + 1]
+  return (newBuffer, newTargetChar, true, 0)
+return (newBuffer, targetChar, false, errorCount + 1)
+
+If the character typed is a backspace:
+newBuffer = buffer[:-1]
+if isValid:
+  newTargetChar = source[buffer.length + 1]
+  return (newBuffer, newTargetChar, true, 0)
+if newBuffer == source[:newBuffer.length]:
+  return (newBuffer, targetChar, true, 0)\
+return (newBuffer, targetChar, false, errorCount - 1)
+
+When rendering:
+if i < pos, simply return span with that character
+if i === pos: return span with validity color
+
+
+

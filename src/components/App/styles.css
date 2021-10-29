@@ -1,0 +1,12 @@
+.App {
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.valid {
+  background-color: green;
+}
+
+.invalid {
+  background-color: red;
+}
