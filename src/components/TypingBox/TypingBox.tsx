@@ -19,7 +19,7 @@ const TypingBox = ({ source }: Props) => {
     let timerId: number | undefined;
     const startTime = Date.now();
     if (timerRunning) {
-      timerId = setInterval(() => setTime(Date.now() - startTime), 100);
+      timerId = window.setInterval(() => setTime(Date.now() - startTime), 100);
     }
     return () => clearInterval(timerId);
   }, [timerRunning]);
